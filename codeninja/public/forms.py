@@ -16,6 +16,10 @@ class RegisterForm(Form):
         self.user = None
 
     def validate(self):
+        """
+        Performs registration validation. Checks for duplicate user and email as well as required fields
+        :return:
+        """
         initial_validation = super(RegisterForm, self).validate()
         if not initial_validation:
             return False
@@ -40,6 +44,11 @@ class LoginForm(Form):
         self.user = None
 
     def validate(self):
+        """
+        Performs login validation. Checks the user password, that the username exists, and that the user is active.
+        Also checks the login fields match what's required
+        :return:
+        """
         initial_validation = super(LoginForm, self).validate()
         if not initial_validation:
             return False
