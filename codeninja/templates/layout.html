@@ -11,8 +11,16 @@
     {% block styles %}{% endblock %}
 </head>
 <body>
-{% block body %}
+{% block content %}
 
 {% endblock %}
 </body>
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            {{ message }}
+            <br/>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
 </html>
