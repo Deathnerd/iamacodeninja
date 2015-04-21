@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block body %}
+	{% set todos = ['Make form', 'Logins', 'Signups', 'Logouts'] %}
+    <h3>TODOs for this page</h3>
+    <ul>
+	{% for item in todos %}
+		<li>{{ item }}</li>
+    {% endfor %}
+    </ul>
+	<p>Howdy</p>
+{% endblock %}
