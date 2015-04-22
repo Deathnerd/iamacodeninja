@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, g, redirect, url_for, request, flash
 from flask.ext.login import login_required
 from .forms import AccountManagementForm
-from ..models import User, Template, Profile
+from ..models import User, Template
 from ..app import db
 from ..utils import flash_errors
 

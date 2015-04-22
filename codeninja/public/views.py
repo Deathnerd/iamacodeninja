@@ -15,12 +15,13 @@ def load_user(id):
 	"""
 	return User.get_by_id(int(id))
 
+
 @blueprint.route("/")
 def index():
 	"""
 	The public home page. Make it purty and awesome!
 	"""
-	return "This is the index page"
+	return render_template('public/index.html')
 
 
 @blueprint.route('/login', methods=["GET", "POST"])
