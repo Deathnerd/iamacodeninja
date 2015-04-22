@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, g, redirect, url_for, request, flash
-from flask.ext.login import login_user, logout_user
+from flask.ext.login import login_user, logout_user, login_required
 from .forms import RegisterForm, LoginForm
 from ..models import User
 from ..utils import flash_errors
@@ -45,11 +45,13 @@ def login():
 
 
 @blueprint.route('/logout')
+@login_required
 def logout():
 	"""
 	Handles logout logic
 	:return:
 	"""
+	logout_user()
 	return render_template('public/logout.html')
 
 

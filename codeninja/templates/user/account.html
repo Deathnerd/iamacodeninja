@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block content %}
+	<h1>Account Settings for {{ user.username }}</h1>
+    <table>
+        <tr>
+            <td>Email: </td>
+            <td>{{ user.email }}</td>
+        </tr>
+        <tr>
+            <td>Admin Status: </td>
+            <td>{{ "Yes" if user.admin else "No" }}</td>
+        </tr>
+        <tr>
+            <td>Active? </td>
+            <td>{{ "Yes" if user.active else "No" }}</td>
+        </tr>
+    </table>
+{% endblock %}

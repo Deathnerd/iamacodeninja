@@ -9,7 +9,8 @@ blueprint = Blueprint("ninja_user", __name__, url_prefix="/u", static_folder="..
 def manage_user_account(user_name):
 	if g.user.username != user_name:
 		return redirect(url_for('ninja_user.user_profile', user_name=g.user.username))
-	return "This is the account management page for {user}".format(user=user_name)
+
+	return render_template("user/account.html", user=g.user)
 
 
 @blueprint.route('/<string:user_name>')
