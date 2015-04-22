@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block content %}
+	<h1>Account Settings for {{ user.username }}</h1>
+    {#<table>
+        <tr>
+            <td>Email: </td>
+            <td>{{ user.email }}</td>
+        </tr>
+        <tr>
+            <td>Active? </td>
+            <td>{{ "Yes" if user.active else "No" }}</td>
+        </tr>
+        <tr>
+            <td>Admin Status: </td>
+            <td>{{ "Yes" if user.admin else "No" }}</td>
+        </tr>
+    </table>#}
+    <form id="accountManagementForm" class="form register" role="form" method="POST" action="">
+    {{ form.hidden_tag() }}
+        <table>
+            <tr>
+                <td>{{ form.email.label }}</td>
+                <td>{{ form.email(placeholder=user.email, class_="form-control") }}</td>
+            </tr>
+            <tr>
+                <td>{{ form.active.label }}</td>
+                <td>{{ form.active }}</td>
+            </tr>
+            <tr>
+                <td>Admin Status:</td>
+                <td>{{ "Yes" if user.admin else "No" }}</td>
+            </tr>
+        </table>
+        <input class="btn btn-default btn-submit" type="submit" value="Submit Changes"/>
+    </form>
+    <p>Click <a href="{{ url_for('ninja_user.user_profile', user_name=user.username) }}">here</a> to go back to your profile</p>
+{% endblock %}
