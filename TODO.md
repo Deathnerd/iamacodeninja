@@ -1,17 +1,15 @@
 ###Create Models
 - [ ] User (In progress)
+    - [x] User information
 	- [ ] Profile Pictures
 		- [ ] Default picture (Gravatar?)
-	- [ ] Many-to-many between programming languages and the users
-- [ ] Programming Languages (In progress)
-- [ ] Profiles (In Progress)
+- [x] Profiles (In Progress)
 
 ### Create Forms
-- [ ] Sign-in
-- [ ] Sign-up
 
-### Create profile templates
+### Create Profile Templates
 
+### Site Design
 
 ### Extras
 - [ ] Integrations
