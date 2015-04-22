@@ -53,7 +53,7 @@ class Development(Base):
 	DEBUG_TB_TEMPLATE_EDITOR_ENABLED = True
 
 	# Flask-Assets
-	ASSETS_DEBUG = True
+	# ASSETS_DEBUG = True
 
 	# WTF-Forms
 

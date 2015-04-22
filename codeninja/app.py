@@ -11,10 +11,24 @@ import public
 def register_assets():
 	"""
 	Register the static assets to be minimized with Flask-Assets
+	TODO: Get it working right :/
 	:return None:
 	"""
-	js = Bundle('jquery.js', 'main.js', filters='jsmin', output='packed/site.js')
+	js = Bundle('assets/plugins/jquery-1.11.1.min.js',
+				'assets/plugins/jquery-migrate-1.2.1.min.js',
+				'assets/plugins/jquery.easing.1.3.js',
+				'assets/plugins/jquery-scrollTo/jquery.scrollTo.min.js',
+				'assets/plugins/prism/min/prism-min.js',
+				'assets/js/min/main-min.js',
+				filters='jsmin', output='assets/packed/site.js')
+	css = Bundle('assets/plugins/bootstrap/css/bootstrap.min.css',
+				 'assets/plugins/font-awesome/css/font-awesome.css',
+				 'assets/plugins/prism/min/prism.css',
+				 'assets/css/styles-4.css',
+				 filters='cssmin', output='assets/packed/site.css')
+
 	assets.register('js_all', js)
+	assets.register('css_all', css)
 	return None
 
 
