@@ -1,11 +1,12 @@
 from flask import Blueprint, render_template, g, redirect, url_for, request, flash
 from flask.ext.login import login_user, logout_user, login_required
 from .forms import RegisterForm, LoginForm
-from ..models import User
+from ..models import User, Template, Profile
 from ..utils import flash_errors
 from ..extensions import login_manager
 
 blueprint = Blueprint("public", __name__, static_folder="../static")
+
 
 @login_manager.user_loader
 def load_user(id):
@@ -29,7 +30,7 @@ def login():
 	:return:
 	"""
 	# If the user is logged in, then boot them to their account
-	if g.user:
+	if g.user and not g.user.is_anonymous():
 		return redirect(url_for('ninja_user.user_profile', user_name=g.user.username))
 	form = LoginForm(request.form)
 	# Handle the login
@@ -63,10 +64,18 @@ def register():
 	"""
 	form = RegisterForm(request.form, csrf_enabled=False)
 	if form.validate_on_submit():
+		template = Template.query.filter_by(filename=form.templates.data).first()  # Get the template they selected
 		new_user = User.create(username=form.username.data,
 							   email=form.email.data,
 							   password=form.password.data,
+							   nickname=form.nickname.data,
+							   gender=form.gender.data,
+							   first_name=form.first_name.data,
+							   middle_name=form.middle_name.data,
+							   last_name=form.last_name.data,
 							   active=True)
+		profile = Profile.create(template_id=template.id, user_id=new_user.id)  # Create a new profile based on that template
+		new_user.update(profile=profile)
 		flash('Thank you for registering. You can now log in!', "success")
 		return redirect(url_for('public.index'))
 	else:

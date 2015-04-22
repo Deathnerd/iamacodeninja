@@ -1,7 +1,7 @@
 from flask import Flask
 from .settings import Production
 from .extensions import bcrypt, db, migrate, debug_toolbar, admin, login_manager, assets
-from .models import User, Profile
+from .models import User, Profile, Template
 from flask.ext.admin.contrib.sqla import ModelView
 from flask.ext.assets import Bundle
 import user
@@ -33,6 +33,7 @@ def create_app(config_object=Production):
 	register_extensions(app)
 	register_admin(User,
 				   Profile,
+				   Template,
 				   session=db.session)
 	register_blueprints(app)
 	register_assets()

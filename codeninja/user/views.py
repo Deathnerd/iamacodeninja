@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, g, redirect, url_for, request, flash
 from flask.ext.login import login_required
 from .forms import AccountManagementForm
-from ..models import User
+from ..models import User, Template, Profile
 from ..app import db
 from ..utils import flash_errors
 
@@ -15,7 +15,8 @@ def manage_user_account(user_name):
 		return redirect(url_for('ninja_user.user_profile', user_name=g.user.username))
 	# Handle the changes to a user's account
 	user = User.get_by_id(int(g.user.id))
-	form = AccountManagementForm(request.form, active=user.active, email=user.email)
+	form = AccountManagementForm(request.form, active=user.active, email=user.email,
+								 )
 	if request.method == 'POST':
 		if form.validate_on_submit():
 			user.email = form.email.data
@@ -31,4 +32,9 @@ def manage_user_account(user_name):
 
 @blueprint.route('/<string:user_name>')
 def user_profile(user_name):
-	return "This is the user page for {user}".format(user=user_name)
+	user = User.query.filter_by(username=user_name).first()
+	if not user:
+		return "This user does not exist. Have you lost them?"  # Return a 401 page
+
+	template = Template.query.filter_by(id=user.profile.template_id).first()
+	return render_template("profile_templates/{}.html".format(template.filename), user=user)

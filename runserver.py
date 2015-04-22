@@ -3,7 +3,7 @@ from flask.ext.script import Manager, Shell, Server
 from flask.ext.migrate import MigrateCommand
 from codeninja.app import create_app, db
 from codeninja.settings import Production, Development, Staging
-from codeninja.models import User, Profile
+from codeninja.models import User, Profile, Template
 from flask import g
 from flask.ext.login import current_user
 
@@ -32,7 +32,7 @@ def _make_context():
 	Return context dict for a shell session so we can access things
 	:return:
 	"""
-	return {'app': app, 'db': db, 'User': User, 'Profile': Profile}
+	return {'app': app, 'db': db, 'User': User, 'Profile': Profile, 'Template': Template}
 
 
 manager.add_command('server', Server())
