@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>{% block title %}I am a Code Ninja!{% endblock %}</title>
+	{% assets "js_all" %}
+        <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+	{% endassets %}
+
+    {% block javascript %}{% endblock %}
+    {% block styles %}{% endblock %}
+</head>
+<body>
+{% block content %}
+
+{% endblock %}
+</body>
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            {{ message }}
+            <br/>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+</html>

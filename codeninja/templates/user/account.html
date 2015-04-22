@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block content %}
+	<h1>Account Settings for {{ user.username }}</h1>
+    <form id="accountManagementForm" class="form register" role="form" method="POST" action="">
+    {{ form.hidden_tag() }}
+        <table>
+            <tr>
+                <td>{{ form.email.label }}</td>
+                <td>{{ form.email(placeholder=user.email, class_="form-control") }}</td>
+            </tr>
+            <tr>
+                <td>{{ form.active.label }}</td>
+                <td>{{ form.active(class_="form-control") }}</td>
+            </tr>
+            <tr>
+                <td>{{ form.nickname.label }}</td>
+                <td>{{ form.nickname(placeholder=user.nickname, class_="form-control") }}</td>
+            </tr>
+            <tr>
+                <td>{{ form.first_name.label }}</td>
+                <td>{{ form.first_name(placeholder=user.first_name, class_="form-control") }}</td>
+            </tr>
+            <tr>
+                <td>{{ form.middle_name.label }}</td>
+                <td>{{ form.middle_name(placeholder=user.middle_name, class_="form-control") }}</td>
+            </tr>
+            <tr>
+                <td>{{ form.last_name.label }}</td>
+                <td>{{ form.last_name(placeholder=user.last_name, class_="form-control") }}</td>
+            </tr>
+            <tr>
+                <td>{{ form.gender.label }}</td>
+                <td>{{ form.gender(placeholder=user.gender, class_="form-control") }}</td>
+            </tr>
+            <tr>
+                <td>{{ form.templates.label }}</td>
+                <td>{{ form.templates(placeholder=user.profile.template.filename, class_="form-control") }}</td>
+            </tr>
+            <tr>
+                <td>Admin Status:</td>
+                <td>{{ "Yes" if user.admin else "No" }}</td>
+            </tr>
+        </table>
+        <input class="btn btn-default btn-submit" type="submit" value="Submit Changes"/>
+    </form>
+    <p>Click <a href="{{ url_for('ninja_user.user_profile', user_name=user.username) }}">here</a> to go back to your profile</p>
+{% endblock %}
