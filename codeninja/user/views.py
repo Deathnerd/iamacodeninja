@@ -15,12 +15,20 @@ def manage_user_account(user_name):
 		return redirect(url_for('ninja_user.user_profile', user_name=g.user.username))
 	# Handle the changes to a user's account
 	user = User.get_by_id(int(g.user.id))
-	form = AccountManagementForm(request.form, active=user.active, email=user.email,
-								 )
+	form = AccountManagementForm(request.form, active=user.active, email=user.email, nickname=user.nickname,
+								 first_name=user.first_name, middle_name=user.middle_name, last_name=user.last_name,
+								 gender=user.gender)
 	if request.method == 'POST':
 		if form.validate_on_submit():
 			user.email = form.email.data
 			user.active = form.active.data
+			user.nickname = form.nickname.data
+			user.first_name = form.first_name.data
+			user.middle_name = form.middle_name.data
+			user.last_name = form.last_name.data
+			user.gender = form.gender.data
+			template = Template.query.filter_by(filename=form.templates.data).first()
+			user.profile.template = template
 			db.session.add(user)
 			db.session.commit()
 			flash("Account settings saved!", "success")
