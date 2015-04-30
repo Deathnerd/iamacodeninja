@@ -1,53 +1,60 @@
-{% extends "layout.html" %}
+{% extends "site-layout.html" %}
 {% block content %}
-<div class="container-narrow">
-    <h1>Register</h1>
-    <br/>
+	<section class="section promo">
 
-    <form id="registerForm" class="form register" method="POST" role="form" action="">
-        {{ form.hidden_tag() }}
-        <div class="form-group">
-            {{ form.username.label }}
-            {{ form.username(placeholder="Username", class_="form-control") }}
-        </div>
-        <div class="form-group">
-            {{ form.email.label }}
-            {{ form.email(placeholder="Email", class_="form-control") }}
-        </div>
-        <div class="form-group">
-            {{ form.password.label }}
-            {{ form.password(placeholder="Password", class_="form-control") }}
-        </div>
-        <div class="form-group">
-            {{ form.confirm.label }}
-            {{ form.confirm(placeholder="Password (again)", class_="form-control") }}
-        </div>
-        <div class="form-group">
-            {{ form.nickname.label}}
-            {{ form.nickname(placeholder='Ninja', class_="form-control") }}
-        </div>
-        <div class="form-group">
-            {{ form.first_name.label}}
-            {{ form.first_name(placeholder="Foo", class_="form-control") }}
-        </div>
-        <div class="form-group">
-            {{ form.middle_name.label}}
-            {{ form.middle_name(placeholder="M.", class_="form_control") }}
-        </div>
-        <div class="form-group">
-            {{ form.last_name.label}}
-            {{ form.last_name(placeholder="Bar", class_="form-control") }}
-        </div>
-        <div class="form-group">
-            {{ form.gender.label}}
-            {{ form.gender(class_="form-control") }}
-        </div>
-        <div class="form-group">
-            {{ form.templates.label}}
-            {{ form.templates(class_="form-control") }}
-        </div>
-        <p><input class="btn btn-default btn-submit" type="submit" value="Register"/></p>
-    </form>
-    <p><em>Already registered?</em> Click <a href="{{ url_for('public.register') }}">here</a> to login.</p>
-</div>
+    </section>
+	<section class="section register-container">
+		<h1>Register</h1>
+		<br/>
+
+		<form id="registerForm" class="form register" method="POST" role="form" action="">
+			{{ form.hidden_tag() }}
+            <div class="col-md-6">
+                <div class="form-group">
+                    {{ form.username.label }}
+                    {{ form.username(placeholder="Username", class_="form-control") }}
+                </div>
+                <div class="form-group">
+                    {{ form.email.label }}
+                    {{ form.email(placeholder="Email", class_="form-control") }}
+                </div>
+                <div class="form-group">
+                    {{ form.password.label }}
+                    {{ form.password(placeholder="Password", class_="form-control") }}
+                </div>
+                <div class="form-group">
+                    {{ form.confirm.label }}
+                    {{ form.confirm(placeholder="Password (again)", class_="form-control") }}
+                </div>
+                <div class="form-group">
+                    {{ form.nickname.label }}
+                    {{ form.nickname(placeholder='Ninja', class_="form-control") }}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    {{ form.first_name.label }}
+                    {{ form.first_name(placeholder="Foo", class_="form-control") }}
+                </div>
+                <div class="form-group">
+                    {{ form.middle_name.label }}
+                    {{ form.middle_name(placeholder="M.", class_="form-control") }}
+                </div>
+                <div class="form-group">
+                    {{ form.last_name.label }}
+                    {{ form.last_name(placeholder="Bar", class_="form-control") }}
+                </div>
+                <div class="form-group">
+                    {{ form.gender.label }}
+                    {{ form.gender(class_="form-control") }}
+                </div>
+                <div class="form-group">
+                    {{ form.templates.label }}
+                    {{ form.templates(class_="form-control") }}
+                </div>
+            </div>
+			<p><input class="btn btn-default btn-submit" type="submit" value="Register"/></p>
+		</form>
+		<p><em>Already registered?</em> Click <a href="{{ url_for('public.register') }}">here</a> to login.</p>
+	</section>
 {% endblock %}

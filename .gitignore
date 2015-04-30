@@ -110,3 +110,4 @@ migrations/
 countries.json
 states.json
 programming_languages.json
+packed/
