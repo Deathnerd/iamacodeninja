@@ -37,9 +37,10 @@ def login():
     # Handle the login
     if request.method == 'POST':
         if form.validate_on_submit():
-            login_user(form.user)
+            login_user(form.user, remember=form.remember_me.data)
             flash("You have successfully logged in. Huzzah!", 'success')
-            redirect_url = request.args.get("next") or url_for("ninja_user.manage_user_account", user_name=form.user.username)
+            redirect_url = request.args.get("next") or url_for("ninja_user.manage_user_account",
+                                                               user_name=form.user.username)
             return redirect(redirect_url)
         else:
             flash_errors(form)
@@ -75,7 +76,8 @@ def register():
                                middle_name=form.middle_name.data,
                                last_name=form.last_name.data,
                                active=True)
-        profile = Profile.create(template_id=template.id, user_id=new_user.id)  # Create a new profile based on that template
+        profile = Profile.create(template_id=template.id,
+                                 user_id=new_user.id)  # Create a new profile based on that template
         new_user.update(profile=profile)
         flash('Thank you for registering. You can now log in!', "success")
         return redirect(url_for('public.index'))

@@ -1,7 +1,7 @@
 from flask_wtf import Form
-from wtforms import StringField, PasswordField, SelectField
-from wtforms.validators import DataRequired, Email, EqualTo, Length
-from ..models import User, Template, Profile
+from wtforms import StringField, PasswordField, SelectField, BooleanField
+from wtforms.validators import DataRequired, Email, Length
+from ..models import User, Template
 
 
 class RegisterForm(Form):
@@ -45,6 +45,7 @@ class RegisterForm(Form):
 class LoginForm(Form):
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
+    remember_me = BooleanField('Remember Me', default=False)
 
     def __init__(self, *args, **kwargs):
         super(LoginForm, self).__init__(*args, **kwargs)

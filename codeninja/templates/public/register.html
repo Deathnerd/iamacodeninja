@@ -1,60 +1,182 @@
 {% extends "site-layout.html" %}
+{#{% block content %}
+    <div class="container-narrow">
+        <h1>Register</h1>
+        <br/>
+
+        <form id="registerForm" class="form register" method="POST" role="form" action="">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                {{ form.username.label }}
+                {{ form.username(placeholder="Username", class_="form-control") }}
+            </div>
+            <div class="form-group">
+                {{ form.email.label }}
+                {{ form.email(placeholder="Email", class_="form-control") }}
+            </div>
+            <div class="form-group">
+                {{ form.password.label }}
+                {{ form.password(placeholder="Password", class_="form-control") }}
+            </div>
+            <div class="form-group">
+                {{ form.confirm.label }}
+                {{ form.confirm(placeholder="Password (again)", class_="form-control") }}
+            </div>
+            <div class="form-group">
+                {{ form.nickname.label }}
+                {{ form.nickname(placeholder='Ninja', class_="form-control") }}
+            </div>
+            <div class="form-group">
+                {{ form.first_name.label }}
+                {{ form.first_name(placeholder="Foo", class_="form-control") }}
+            </div>
+            <div class="form-group">
+                {{ form.middle_name.label }}
+                {{ form.middle_name(placeholder="M.", class_="form-control") }}
+            </div>
+            <div class="form-group">
+                {{ form.last_name.label }}
+                {{ form.last_name(placeholder="Bar", class_="form-control") }}
+            </div>
+            <div class="form-group">
+                {{ form.gender.label }}
+                {{ form.gender(class_="form-control") }}
+            </div>
+            <div class="form-group">
+                {{ form.templates.label }}
+                {{ form.templates(class_="form-control") }}
+            </div>
+            <p><input class="btn btn-default btn-submit" type="submit" value="Register"/></p>
+        </form>
+        <p><em>Already registered?</em> Click <a href="{{ url_for('public.register') }}">here</a> to login.</p>
+    </div>
+{% endblock %}#}
+
 {% block content %}
-	<section class="section promo">
+    <div class="container">
+        <div id="signupbox" style="margin-top:50px"
+             class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="panel-title">Sign Up</div>
+                    <div style="float:right; font-size: 85%; position: relative; top:-10px">
+                        <a id="signinlink" href="{{ url_for('public.login') }}">Sign In</a>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <form id="signupform" class="form-horizontal" role="form" action="" method="POST">
+{#                        <div id="signupalert" style="display:none" class="alert alert-danger">#}
+{#                            <p>Error:</p>#}
+{#                            <span></span>#}
+{#                        </div>#}
+                        {% with messages = get_flashed_messages(with_categories=true) %}
+							{% if messages %}
+                                <div id="signupalert" class="alert alert-danger">
+                                	<p style="font-weight:bold;">There were errors processing your request</p>
+                                    {% for category, message in messages %}
+                                        <p>{{ message }}</p>
+                                    {% endfor %}</div>
+							{% endif %}
+						{% endwith %}
+						<div class="form-group">
+							<label for="{{ form.username.id }}" class="col-md-3 control-label">{{ form.username.name|capitalize }}</label>
+							<div class="col-md-9">
+								{{ form.username(placeholder="Username", class_="form-control") }}
+							</div>
+						</div>
+                        <div class="form-group">
+                            <label for="{{ form.email.id }}"
+                                   class="col-md-3 control-label">{{ form.email.name|capitalize }}</label>
 
-    </section>
-	<section class="section register-container">
-		<h1>Register</h1>
-		<br/>
+                            <div class="col-md-9">
+                                {{ form.email(placeholder="Email", class_="form-control") }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="{{ form.password.id }}"
+                                   class="col-md-3 control-label">{{ form.password.name|capitalize }}</label>
 
-		<form id="registerForm" class="form register" method="POST" role="form" action="">
-			{{ form.hidden_tag() }}
-            <div class="col-md-6">
-                <div class="form-group">
-                    {{ form.username.label }}
-                    {{ form.username(placeholder="Username", class_="form-control") }}
-                </div>
-                <div class="form-group">
-                    {{ form.email.label }}
-                    {{ form.email(placeholder="Email", class_="form-control") }}
-                </div>
-                <div class="form-group">
-                    {{ form.password.label }}
-                    {{ form.password(placeholder="Password", class_="form-control") }}
-                </div>
-                <div class="form-group">
-                    {{ form.confirm.label }}
-                    {{ form.confirm(placeholder="Password (again)", class_="form-control") }}
-                </div>
-                <div class="form-group">
-                    {{ form.nickname.label }}
-                    {{ form.nickname(placeholder='Ninja', class_="form-control") }}
+                            <div class="col-md-9">
+                                {{ form.password(placeholder="Password", class_="form-control") }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="{{ form.confirm.id }}"
+                                   class="col-md-3 control-label">{{ form.confirm.name|capitalize }}</label>
+
+                            <div class="col-md-9">
+                                {{ form.confirm(placeholder="Password (again)", class_="form-control") }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="{{ form.nickname.id }}"
+                                   class="col-md-3 control-label">{{ form.nickname.name|capitalize }}</label>
+
+                            <div class="col-md-9">
+                                {{ form.nickname(placeholder="Ninja", class_="form-control") }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="{{ form.first_name.id }}"
+                                   class="col-md-3 control-label">{{ form.first_name.name|capitalize }}</label>
+
+                            <div class="col-md-9">
+                                {{ form.first_name(placeholder="Foo", class_="form-control") }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="{{ form.middle_name.id }}"
+                                   class="col-md-3 control-label">{{ form.middle_name.name|capitalize }}</label>
+
+                            <div class="col-md-9">
+                                {{ form.middle_name(placeholder="M.", class_="form-control") }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="{{ form.last_name.id }}"
+                                   class="col-md-3 control-label">{{ form.last_name.name|capitalize }}</label>
+
+                            <div class="col-md-9">
+                                {{ form.last_name(placeholder="Bar", class_="form-control") }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="{{ form.gender.id }}"
+                                   class="col-md-3 control-label">{{ form.gender.name|capitalize }}</label>
+
+                            <div class="col-md-9">
+                                {{ form.gender(class_="form-control") }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="{{ form.templates.id }}"
+                                   class="col-md-3 control-label">{{ form.templates.name|capitalize }}</label>
+
+                            <div class="col-md-9">
+                                {{ form.templates(class_="form-control") }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <!-- Button -->
+                            <div class="col-md-offset-3 col-md-9">
+                                <button id="btn-signup" type="button" class="btn btn-info"
+                                        onclick="document.getElementById('signupform').submit();"><i
+                                        class="icon-hand-right"></i> Sign Up
+                                </button>
+{#                                <span style="margin-left:8px;">or</span>#}
+                            </div>
+                        </div>
+                        {#<div style="border-top: 1px solid #999; padding-top:20px" class="form-group">
+                            <div class="col-md-offset-3 col-md-9">
+                                <button id="btn-fbsignup" type="button" class="btn btn-primary"><i
+                                        class="icon-facebook"></i>   Sign Up with Facebook
+                                </button>
+                            </div>
+                        </div>#}
+                    </form>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    {{ form.first_name.label }}
-                    {{ form.first_name(placeholder="Foo", class_="form-control") }}
-                </div>
-                <div class="form-group">
-                    {{ form.middle_name.label }}
-                    {{ form.middle_name(placeholder="M.", class_="form-control") }}
-                </div>
-                <div class="form-group">
-                    {{ form.last_name.label }}
-                    {{ form.last_name(placeholder="Bar", class_="form-control") }}
-                </div>
-                <div class="form-group">
-                    {{ form.gender.label }}
-                    {{ form.gender(class_="form-control") }}
-                </div>
-                <div class="form-group">
-                    {{ form.templates.label }}
-                    {{ form.templates(class_="form-control") }}
-                </div>
-            </div>
-			<p><input class="btn btn-default btn-submit" type="submit" value="Register"/></p>
-		</form>
-		<p><em>Already registered?</em> Click <a href="{{ url_for('public.register') }}">here</a> to login.</p>
-	</section>
+        </div>
+    </div>
+
 {% endblock %}
