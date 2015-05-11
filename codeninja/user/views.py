@@ -5,15 +5,16 @@ from .forms import AccountManagementForm
 from ..models import User, Template
 from ..app import db
 from ..utils import flash_errors
+from jinja2.exceptions import TemplateNotFound
 
-blueprint = Blueprint("user", __name__, url_prefix="/u", static_folder="../static")
+blueprint = Blueprint("ninja_user", __name__, url_prefix="/u", static_folder="../static")
 
 
 @blueprint.route("/<string:user_name>/account", methods=['GET', 'POST'])
 @login_required
 def manage_user_account(user_name):
     if g.user.username != user_name:
-        return redirect(url_for('user.profile', user_name=g.user.username))
+        return redirect(url_for('ninja_user.profile', user_name=g.user.username))
     # Handle the changes to a user's account
     user = User.get_by_id(int(g.user.id))
     form = AccountManagementForm(request.form, active=user.active, email=user.email, nickname=user.nickname,
@@ -33,7 +34,7 @@ def manage_user_account(user_name):
             db.session.add(user)
             db.session.commit()
             flash("Account settings saved!", "success")
-            return redirect(url_for('user.manage_user_account', user_name=g.user))
+            return redirect(url_for('ninja_user.manage_user_account', user_name=g.user))
         else:
             flash_errors(form)
     return render_template("user/account.html", user=g.user, form=form)
@@ -46,7 +47,12 @@ def profile(user_name):
         return "This user does not exist. Have you lost them?"  # Return a 401 page. TODO: Make the damn 401 page
 
     template = Template.query.filter_by(id=user.profile.template_id).first()
-    return render_template("profile_templates/{}.html".format(template.filename), user=user)
+    # TODO: Exception handling for template not found. Redirect to error special 404 page
+    try:
+        return render_template("profile_templates/{}.html".format(template.filename), user=user)
+    except TemplateNotFound:
+        return "The way has lost. Excuse us while we meditate and find the path"
+
 
 @blueprint.route("/test")
 def test():

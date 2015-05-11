@@ -33,14 +33,14 @@ def login():
     """
     # If the user is logged in, then boot them to their account
     if g.user and not g.user.is_anonymous():
-        return redirect(url_for('user.profile', user_name=g.user.username))
+        return redirect(url_for('ninja_user.profile', user_name=g.user.username))
     form = LoginForm(request.form)
     # Handle the login
     if request.method == 'POST':
         if form.validate_on_submit():
             login_user(form.user, remember=form.remember_me.data)
             flash("You have successfully logged in. Huzzah!", 'success')
-            redirect_url = request.args.get("next") or url_for("user.manage_user_account",
+            redirect_url = request.args.get("next") or url_for("ninja_user.manage_user_account",
                                                                user_name=form.user.username)
             return redirect(redirect_url)
         else:

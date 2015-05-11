@@ -51,7 +51,7 @@ def create_app(config_object=Production):
                    Template,
                    session=db.session)
     register_blueprints(app)
-    register_assets()
+    # register_assets()
 
     # Configuration
     configure_login()
