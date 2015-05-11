@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import os
 from flask.ext.script import Manager, Shell, Server
 from flask.ext.migrate import MigrateCommand
@@ -19,6 +20,15 @@ else:
 @app.before_request
 def load_user():
     g.user = current_user
+
+
+@app.template_global("current_date")
+def current_date():
+    from datetime import datetime as dt
+
+    t = dt.now()
+    return {"year":t.year, "month":t.month, "day":t.day,
+            "hour":t.hour, "minute":t.minute, "second":t.second}
 
 
 HERE = os.path.abspath(os.path.dirname(__file__))

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from flask import Flask
 from .settings import Production
 from .extensions import bcrypt, db, migrate, debug_toolbar, admin, login_manager, assets
@@ -99,10 +100,6 @@ def register_admin(*args, **kwargs):
 
 
 def admin_views():
-    # from .admin import views
-    # admin.add_view(views.MyView(name="Hello 1", endpoint="test1", category="Test"))
-    # admin.add_view(views.MyView(name="Hello 2", endpoint="test2", category="Test"))
-    # admin.add_view(views.MyView(name="Hello 3", endpoint="test3", category="Test"))
     return None
 
 

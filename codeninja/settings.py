@@ -1,4 +1,4 @@
-__author__ = 'Deathnerd'
+# -*- coding: utf-8 -*-
 import os
 
 

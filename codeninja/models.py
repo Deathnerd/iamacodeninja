@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from .app import db
 from flask.ext.login import UserMixin
 from codeninja.extensions import bcrypt
