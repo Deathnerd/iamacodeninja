@@ -1,13 +1,16 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, render_template, g, redirect, url_for, request, flash
 from flask.ext.login import login_required
+
 from .forms import AccountManagementForm
 from ..models import User, Template
 from ..app import db
 from ..utils import flash_errors
-from jinja2.exceptions import TemplateNotFound
+
 
 blueprint = Blueprint("ninja_user", __name__, url_prefix="/u", static_folder="../static")
+
+
 
 
 @blueprint.route("/<string:user_name>/account", methods=['GET', 'POST'])
@@ -29,8 +32,7 @@ def manage_user_account(user_name):
             user.middle_name = form.middle_name.data
             user.last_name = form.last_name.data
             user.gender = form.gender.data
-            template = Template.query.filter_by(filename=form.templates.data).first()
-            user.profile.template = template
+            user.profile.template = Template.query.filter_by(filename=form.templates.data).first()
             db.session.add(user)
             db.session.commit()
             flash("Account settings saved!", "success")
@@ -47,11 +49,7 @@ def profile(user_name):
         return "This user does not exist. Have you lost them?"  # Return a 401 page. TODO: Make the damn 401 page
 
     template = Template.query.filter_by(id=user.profile.template_id).first()
-    # TODO: Exception handling for template not found. Redirect to error special 404 page
-    try:
-        return render_template("profile_templates/{}.html".format(template.filename), user=user)
-    except TemplateNotFound:
-        return "The way has lost. Excuse us while we meditate and find the path"
+    return render_template("profile_templates/{}.html".format(template.filename), user=user)
 
 
 @blueprint.route("/test")

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from flask import request
 """
 All of our extensions are initialized here. They are registered in
 app.py:register_extensions upon app creation

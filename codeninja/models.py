@@ -81,3 +81,7 @@ class Template(db.Model, CRUDMixin, SurrogatePK):
 
     def __repr__(self):
         return "Profile Template: {filename}".format(filename=self.filename)
+
+
+class Question(db.Model):
+    __tablename__ = "foobar"

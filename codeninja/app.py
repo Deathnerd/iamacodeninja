@@ -3,6 +3,7 @@ from flask import Flask
 from .settings import Production
 from .extensions import bcrypt, db, migrate, debug_toolbar, admin, login_manager, assets
 from .models import User, Profile, Template
+from .errors import RequestErrors
 from flask.ext.admin.contrib.sqla import ModelView
 from flask.ext.assets import Bundle
 import user
@@ -55,6 +56,9 @@ def create_app(config_object=Production):
 
     # Configuration
     configure_login()
+
+    errors = RequestErrors()
+    errors.init_app(app)
 
     # admin requires a custom setup
     # admin_views()
